@@ -12,8 +12,29 @@ public class Test
     public static void main(String[] args) {
         Applicant a = new Applicant();
         Scanner in = new Scanner(System.in);
-        System.out.println("What is your program group? (1-3)");
-        a.setProgramGroup(Integer.parseInt(in.nextLine()));
+        boolean wrong_input = true;
+        while(wrong_input)
+        {
+            System.out.println("What is your program group? (1-3)");
+            String input = in.nextLine();
+            try
+            {
+                int num = Integer.parseInt(input);
+                if(1 <= num && num <= 3)
+                {
+                    a.setProgramGroup(num);
+                    wrong_input = false;
+                }
+                else
+                {
+                    System.out.println("Your input \"" + input + "\" is not between 1 and 3. Please try again.");
+                }
+            }
+            catch(Exception e)
+            {
+                System.out.println("Your input " + input + " is not valid. Please try again.");
+            }
+        }
         System.out.println("What is your high school average? (0-100)");
         a.setAverage(Double.parseDouble(in.nextLine()));
         System.out.println("What is your high school adjustment factor? (9.9-27.1; 16.1 is average)");
@@ -27,7 +48,7 @@ public class Test
         a.calculateChance();
         a.returnPrograms();
         a.returnAdjustedAverage();
-        
+        a.returnRealAdjustedAverage();
         a.returnChance();
     }
 }

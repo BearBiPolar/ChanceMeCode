@@ -29,7 +29,7 @@ public class Applicant
         adjustmentFactor = 16.1;
         aifScore = -1;
         interviewScore = -1;
-        chance = 0;
+        chance = -1;
     }
 
     public void testApplicant()
@@ -99,18 +99,27 @@ public class Applicant
         double x = adjustedAverage + aifScore - 2;
         x = x + interviewScore - 2;
         x = round(x);
+        if(x > 100) {
+            x = 100;
+        }
+        else if (x < 80) {
+            x = 80; 
+        }
         realAdjustedAverage = x;
         switch(programGroup)
         {
             case 1:
-            chance=-0.000000991665*Math.pow(x,6)+0.000712766582*Math.pow(x,5)-0.199337541744*Math.pow(x,4)+28.477751641706*Math.pow(x,3)-2221.069055798020*Math.pow(x,2)+90365.708229188000*x-1505792.893230060000;
+            chance = -0.000000991665*Math.pow(x,6)+0.000712766582*Math.pow(x,5)-0.199337541744*Math.pow(x,4)+28.477751641706*Math.pow(x,3)-2221.069055798020*Math.pow(x,2)+90365.708229188000*x-1505792.893230060000;
             break;
+            
             case 2:
-            chance=0.000007927378*Math.pow(x,6)-0.003815953092*Math.pow(x,5)+0.753733211049*Math.pow(x,4)-77.9121684881*Math.pow(x,3)+4421.4707888*Math.pow(x,2)-129515.4702471*x +1507941.8835368;
+            chance = 0.000007927378*Math.pow(x,6)-0.003815953092*Math.pow(x,5)+0.753733211049*Math.pow(x,4)-77.9121684881*Math.pow(x,3)+4421.4707888*Math.pow(x,2)-129515.4702471*x +1507941.8835368;
             break;
+            
             case 3:
             chance = 0.0005942718*Math.pow(x,4) - 0.2085009655*Math.pow(x,3) + 27.0594414776*Math.pow(x,2) - 1532.9010505906*x + 31865.616776;
             break;
+            
             default:
             break;
         }
